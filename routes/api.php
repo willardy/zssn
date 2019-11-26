@@ -16,3 +16,11 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::namespace('Api')->group(function () {
+    Route::prefix('survivors')->name('survivors')->group(function () {
+        Route::get('/', 'SurvivorsController@index')->name('index');
+        Route::get('/{id}', 'SurvivorsController@show')->name('show');
+//        Route::put('/{id}/location/{latitude}/{$longitude}', 'SurvivorsController@show')->name('show');
+    });
+});
