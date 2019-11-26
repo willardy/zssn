@@ -21,6 +21,9 @@ Route::namespace('Api')->group(function () {
     Route::prefix('survivors')->name('survivors')->group(function () {
         Route::get('/', 'SurvivorsController@index')->name('index');
         Route::get('/{id}', 'SurvivorsController@show')->name('show');
-//        Route::put('/{id}/location/{latitude}/{$longitude}', 'SurvivorsController@show')->name('show');
+
+        Route::post('/', 'SurvivorsController@store')->name('store');
+
+        Route::put('/{id}', 'SurvivorsController@update')->name('update');
     });
 });

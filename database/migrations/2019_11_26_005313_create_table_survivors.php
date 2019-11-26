@@ -20,6 +20,7 @@ class CreateTableSurvivors extends Migration
             $table->string('gender');
             $table->string('latitude');
             $table->string('longitude');
+            $table->boolean('infected');
             $table->timestamps();
         });
     }

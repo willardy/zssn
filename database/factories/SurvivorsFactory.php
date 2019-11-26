@@ -11,6 +11,7 @@ $factory->define(\App\Survivor::class, function (Faker $faker) {
         'age'  => $faker->randomNumber(),
         'gender' => $faker->text,
         'latitude' => $faker->randomFloat(),
-        'longitude' => $faker->randomFloat()
+        'longitude' => $faker->randomFloat(),
+        'infected' => $faker->boolean
     ];
 });
