@@ -1,9 +1,9 @@
 <?php
 
-use App\Survivor;
+use App\Resource;
 use Illuminate\Database\Seeder;
 
-class SurvivorsTableSeeder extends Seeder
+class ResourcesTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,6 +12,6 @@ class SurvivorsTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(Survivor::class, 20)->create();
+        factory(Resource::class, 10)->create();
     }
 }

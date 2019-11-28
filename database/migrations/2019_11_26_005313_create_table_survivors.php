@@ -17,7 +17,7 @@ class CreateTableSurvivors extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->integer('age');
-            $table->string('gender');
+            $table->enum('gender', ['Male', 'Female']);
             $table->string('latitude');
             $table->string('longitude');
             $table->boolean('infected');

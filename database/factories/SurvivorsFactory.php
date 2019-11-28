@@ -1,17 +1,22 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+/** @var Factory $factory */
 
 use App\Model;
+use App\Survivor;
 use Faker\Generator as Faker;
+use Illuminate\Database\Eloquent\Factory;
 
-$factory->define(\App\Survivor::class, function (Faker $faker) {
+$factory->define(Survivor::class, function (Faker $faker) {
+
+    $arrayValues = ['Male', 'Female'];
+
     return [
         'name' => $faker->name,
-        'age'  => $faker->randomNumber(),
-        'gender' => $faker->text,
+        'age' => $faker->numberBetween(10, 60),
+        'gender' => $arrayValues[rand(0, 1)],
         'latitude' => $faker->randomFloat(),
         'longitude' => $faker->randomFloat(),
-        'infected' => $faker->boolean
+        'infected' => false
     ];
 });

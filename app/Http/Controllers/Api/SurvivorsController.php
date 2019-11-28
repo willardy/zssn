@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Survivor;
+use Exception;
 use Illuminate\Http\Request;
 
 class SurvivorsController extends Controller
@@ -18,14 +19,29 @@ class SurvivorsController extends Controller
 
     public function index()
     {
-        $data = ['data' => $this->survivor->all()];
-        return response()->json($data);
+        try {
+            $data = ['data' => $this->survivor->all()];
+            return response()->json($data);
+        } catch (Exception $exception) {
+            return response()->json(["error" => $exception->getMessage()]);
+        }
     }
 
-    public function show(Survivor $id)
+    public function show($id)
     {
-        $data = ['data' => $id];
-        return response()->json($data);
+        try {
+            $survivor = Survivor::find($id);
+
+            if (!$survivor) {
+                return response()->json(['erro' => 'Survivor not found'], 404);
+            }
+
+            $data = ['data' => $survivor];
+            return response()->json($data);
+        } catch (Exception $exception) {
+            return response()->json(["error" => $exception->getMessage()]);
+        }
+
     }
 
     public function store(Request $request)
@@ -34,9 +50,9 @@ class SurvivorsController extends Controller
             $survivorData = $request->all();
             $this->survivor->create($survivorData);
             return response()->json(["msg" => "Survivor created at success"], 201);
-        } catch (\Exception $exception) {
-            if(config('app.debug')){
-                return response()->json(['Erro' => $exception->getMessage()],404);
+        } catch (Exception $exception) {
+            if (config('app.debug')) {
+                return response()->json(['Erro' => $exception->getMessage()], 404);
             }
         }
     }
@@ -44,16 +60,23 @@ class SurvivorsController extends Controller
     public function update(Request $request, $id)
     {
         try {
-//            return $request->get('name');
-            $survivorData = $request->all();
+            $latitude = $request->latitude;
+            $longitude = $request->longitude;
+
             $survivor = $this->survivor->find($id);
+            $survivor->latitude = $latitude;
+            $survivor->longitude = $longitude;
 
-            $survivor->update($survivorData);
+            $survivor->update();
 
-            return response()->json(["msg" => "Survivor updated at success"], 201);
-        } catch (\Exception $exception) {
-            if(config('app.debug')){
-                return response()->json(['Erro' => $exception->getMessage()],404);
+            $data = ["msg" => "Survivor updated at success", 'survivor' => $survivor];
+
+            return response()->json($data, 201);
+
+//            return response()->json(["msg" => "Survivor updated at success"], 201);
+        } catch (Exception $exception) {
+            if (config('app.debug')) {
+                return response()->json(['Erro' => $exception->getMessage()], 404);
             }
         }
     }
