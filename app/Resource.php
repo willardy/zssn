@@ -13,7 +13,7 @@ class Resource extends Model
         return $this->belongsTo(Survivor::class);
     }
 
-    public function itens()
+    public function items()
     {
         return $this->belongsTo(Item::class);
     }

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Item;
+use App\Resource;
 use App\Survivor;
 use Exception;
 use Illuminate\Http\Request;
@@ -36,7 +38,20 @@ class SurvivorsController extends Controller
                 return response()->json(['erro' => 'Survivor not found'], 404);
             }
 
-            $data = ['data' => $survivor];
+            $resources = Survivor::find($id)->resources;
+
+            $arrayData = [];
+
+            $count = 0;
+            foreach ($resources as $resource) {
+                $arrayData[$count]['description'] = Item::find($resource->item_id)->description;
+                $arrayData[$count]['points'] = Item::find($resource->item_id)->points;
+                $count++;
+            }
+
+            $data['survivor'] = $survivor;
+            $data['survivor']['resources'] = $arrayData;
+
             return response()->json($data);
         } catch (Exception $exception) {
             return response()->json(["error" => $exception->getMessage()]);
@@ -69,7 +84,7 @@ class SurvivorsController extends Controller
 
             $survivor->update();
 
-            $data = ["msg" => "Survivor updated at success", 'survivor' => $survivor];
+            $data = ["msg" => "Survivor updated at success"];
 
             return response()->json($data, 201);
 
@@ -79,5 +94,9 @@ class SurvivorsController extends Controller
                 return response()->json(['Erro' => $exception->getMessage()], 404);
             }
         }
+    }
+
+    private function getResourcesItems($id){
+
     }
 }
