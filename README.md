@@ -1,78 +1,356 @@
-<p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
+ZSSN (Zombie Survival Social Network)
+================
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+Zssd development in Laravel 6.5 with database PostgreSql 10.
 
-## About Laravel
+## How to install
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+First of all, you need to configure composer and php (7.2 or more) in your environment.<br>
+Now you need to clone this project to you pc.<br>
+After clone this project run composer to install all dependencies.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+```
+composer install
+```
+Ok, let's configurate now the database, first you need copy .env.example to .env in the root of project, env.example is a example of how do you configure you environment.<br>
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+With database configured, let's go to create our migrate and fill it..
 
-## Learning Laravel
+```
+php artisan migrate
+php artisan db:seed
+```
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Then, run `php artisan serve`, and it will be available at http://localhost:8000/api
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+-------------------------------------------------------------------------
 
-## Laravel Sponsors
+## API Documentation
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[British Software Development](https://www.britishsoftware.co)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- [UserInsights](https://userinsights.com)
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-- [User10](https://user10.com)
-- [Soumettre.fr](https://soumettre.fr/)
-- [CodeBrisk](https://codebrisk.com)
-- [1Forge](https://1forge.com)
-- [TECPRESSO](https://tecpresso.co.jp/)
-- [Runtime Converter](http://runtimeconverter.com/)
-- [WebL'Agence](https://weblagence.com/)
-- [Invoice Ninja](https://www.invoiceninja.com)
-- [iMi digital](https://www.imi-digital.de/)
-- [Earthlink](https://www.earthlink.ro/)
-- [Steadfast Collective](https://steadfastcollective.com/)
-- [We Are The Robots Inc.](https://watr.mx/)
-- [Understand.io](https://www.understand.io/)
-- [Abdel Elrafa](https://abdelelrafa.com)
-- [Hyper Host](https://hyper.host)
-- [Appoly](https://www.appoly.co.uk)
-- [OP.GG](https://op.gg)
+### GET /survivors
 
-## Contributing
+```
+GET /survivors
+Content-Type: "application/json"
+```
+##### Returns:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```
+200 Created
+Content-Type: "application/json"
 
-## Code of Conduct
+"data": [
+    {
+        "id": 2,
+        "name": "Gilberto Doyle",
+        "age": 47,
+        "gender": "Male",
+        "latitude": "18158.1727552",
+        "longitude": "261575.5293",
+        "infected": false,
+        "created_at": "2019-11-29 17:10:49",
+        "updated_at": "2019-11-29 17:10:49",
+        "reportsCount": 0
+    },
+    {
+        "id": 3,
+        "name": "Prof. Nico Yundt",
+        "age": 54,
+        "gender": "Female",
+        "latitude": "5.11093238",
+        "longitude": "48425886",
+        "infected": false,
+        "created_at": "2019-11-29 17:10:49",
+        "updated_at": "2019-11-29 17:10:49",
+        "reportsCount": 0
+    }
+]
+```
+### GET /survivor/{id}
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```
+GET /:survivor/{id}
+Content-Type: "application/json"
+```
 
-## Security Vulnerabilities
+Attribute | Description
+----------| -----------
+**id**    | Survivor id
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+#### Returns
 
-## License
+```
+200 Ok
+Content-Type: "application/json"
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+{
+    "id": 1,
+    "name": "Miss Rhoda Abbott PhD",
+    "age": 55,
+    "gender": "Male",
+    "latitude": "116.4865271",
+    "longitude": "6211846.638",
+    "infected": false,
+    "created_at": "2019-11-29 17:10:49",
+    "updated_at": "2019-11-29 17:10:49",
+    "resources": [
+    {
+      "description": "Water",
+      "points": 4
+    },
+    {
+      "description": "Ammunition",
+      "points": 1
+    }
+    ],
+    "reportsCount": 0
+}
+```
+
+### POST /survivors
+
+```
+POST /survivors
+Content-Type: "application/json"
+
+{
+    "name": "Willardy Tyrone",
+    "age": 19,
+    "gender": "Male",
+    "latitude": "1522255.09052",
+    "longitude": "1336523.1439",
+    "infected": false
+}
+```
+##### Returns:
+
+```
+201 Created
+Content-Type: "application/json"
+
+{
+  "msg": "Survivor created at success"
+}
+```
+### GET /survivor/{id}
+
+```
+GET /:survivor/{id}
+Content-Type: "application/json"
+```
+
+Attribute | Description
+----------| -----------
+**id**    | Survivor id
+
+#### Returns
+
+```
+200 Ok
+Content-Type: "application/json"
+
+{
+    "id": 1,
+    "name": "Miss Rhoda Abbott PhD",
+    "age": 55,
+    "gender": "Male",
+    "latitude": "116.4865271",
+    "longitude": "6211846.638",
+    "infected": false,
+    "created_at": "2019-11-29 17:10:49",
+    "updated_at": "2019-11-29 17:10:49",
+    "resources": [
+    {
+      "description": "Water",
+      "points": 4
+    },
+    {
+      "description": "Ammunition",
+      "points": 1
+    }
+    ],
+    "reportsCount": 0
+}
+```
+### PUT /survivor/{id}
+Attribute | Description
+----------| -----------
+**id**    | Survivor id
+
+```
+PUT /:survivor/{id}
+Content-Type: "application/json"
+```
+
+#### Returns
+
+```
+201 Ok
+Content-Type: "application/json"
+
+{
+     "msg": "Survivor updated at success"
+}
+```
+
+### POST /survivor/{survivorReport}/reportInfected/{survivorReported}
+
+```
+POST /:survivor/{survivorReport}/report_infection/{survivorReported}
+Content-Type: "application/json"
+```
+Attribute | Description
+----------| -----------
+**survivorReport**    | Survivor id
+**survivorReported**    | Survivor id
+
+#### Returns
+
+```
+200 Ok
+Content-Type: "application/json"
+
+{
+  "msg": "Unconfirmed infection!"
+}
+```
+
+```
+200 Ok
+Content-Type: "application/json"
+
+{
+  "msg": "Survivor infected!"
+}
+```
+
+```
+400 Ok
+Content-Type: "application/json"
+
+{
+  "msg": "Report already created"
+}
+```
+
+### GET /report/percentInfected
+```
+200 Ok
+Content-Type: "application/json"
+
+GET /reports/percentInfected
+Content-Type: "application/json"
+```
+#### Returns
+```
+200 Ok
+Content-Type: "application/json"
+
+{
+    "msg": "37% of survivors are infected"
+}
+```
+
+### GET /report/percentNonInfected
+```
+200 Ok
+Content-Type: "application/json"
+
+GET /reports/percentNonInfected
+Content-Type: "application/json"
+```
+#### Returns
+```
+{
+    "msg": "37% of survivors are not infected"
+}
+```
+
+### GET /report/averageAmount
+```
+200 Ok
+Content-Type: "application/json"
+
+GET /reports/averageAmount
+Content-Type: "application/json"
+```
+#### Returns
+```
+"data": {
+        "Water": 0.2857142857142857,
+        "Food": 0.2857142857142857,
+        "Medication": 0.14285714285714285,
+        "Ammunition": 1.5714285714285714
+    }   
+```
+
+### GET /report/pointsLost/{id}
+```
+200 Ok
+Content-Type: "application/json"
+
+GET /reports/pointsLost/{id}
+Content-Type: "application/json"
+```
+#### Returns
+```
+200 Ok
+Content-Type: "application/json"
+
+{
+    "message": "Survivor not infected, not yet"
+} 
+```
+
+```
+200 Ok
+Content-Type: "application/json"
+
+{
+    "pointsLost": 4
+}
+```
+
+### PUT /traders/{survivorOften}/tradeItems/{survivorAceppt}
+```
+200 Ok
+Content-Type: "application/json"
+
+PUT /traders/{survivorOften}/tradeItems/{survivorAceppt}
+Content-Type: "application/json"
+```
+#### Returns
+```
+200 Ok
+Content-Type: "application/json"
+
+{
+    "erro": "Survivor are equals"
+}
+```
+
+```
+200 Ok
+Content-Type: "application/json"
+
+{
+    "msg": "Trade is done."
+}
+```
+
+```
+404 Ok
+Content-Type: "application/json"
+
+{
+    "erro": "Survivor not found"
+}
+```
+
+
+
+
+
+
+
