@@ -1,7 +1,7 @@
 ZSSN (Zombie Survival Social Network)
 ================
 
-Zssd development in Laravel 6.5 with database PostgreSql 10.
+Zssn development in Laravel 6.5 with database PostgreSql 10.
 
 ## How to install
 
