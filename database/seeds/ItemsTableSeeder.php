@@ -3,15 +3,13 @@
 use App\Item;
 use Illuminate\Database\Seeder;
 
-class ItemsTableSeeder extends Seeder
-{
+class ItemsTableSeeder extends Seeder {
     /**
      * Run the database seeds.
      *
      * @return void
      */
-    public function run()
-    {
+    public function run() {
         Item::create([
             'description' => 'Water',
             'points' => 4

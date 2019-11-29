@@ -22,7 +22,7 @@ Route::namespace('Api')->group(function () {
         Route::get('/', 'SurvivorsController@index')->name('index');
         Route::get('/{id}', 'SurvivorsController@show')->name('show')->where(['id' => '[0-9]+']);
         Route::post('/', 'SurvivorsController@store')->name('store');
-        Route::put('/{survivor1}/reportInfected/{survivor2}', 'SurvivorsController@reportInfectedSurvival')->name('reportInfected');
+        Route::put('/{survivor1}/reportInfected/{survivor2}', 'SurvivorsController@reportInfectedSurvivor')->name('reportInfected');
         Route::put('/{id}', 'SurvivorsController@update')->name('update');
     });
 

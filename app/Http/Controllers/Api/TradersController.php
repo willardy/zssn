@@ -7,10 +7,8 @@ use App\Item;
 use App\Resource;
 use App\Survivor;
 
-class TradersController extends Controller
-{
-    public function tradeItems($survivorOftenId, $survivorAcepptId)
-    {
+class TradersController extends Controller {
+    public function tradeItems($survivorOftenId, $survivorAcepptId) {
 
         if ($survivorAcepptId == $survivorOftenId) {
             return response()->json(['erro' => 'Survivor are equals'], 409);
@@ -50,7 +48,7 @@ class TradersController extends Controller
             $resourceSurvivorAcceptFinalTrade->quantity = $resource->quantity;
             $resourceSurvivorAcceptFinalTrade->save();
         }
-        
+
         foreach ($resourcesSurvivorAceppt as $resource) {
             $resourceSurvivorOftenFinalTrade = new Resource();
             $resourceSurvivorOftenFinalTrade->survivor_id = $survivorOften->id;
@@ -63,8 +61,7 @@ class TradersController extends Controller
         return response()->json(['msg' => 'Trade is done.']);
     }
 
-    public static function countPoint($survivorInfectedId)
-    {
+    public static function countPoint($survivorInfectedId) {
         $countPointsSurvivor = 0;
         $countAllResources = Resource::where('survivor_id', $survivorInfectedId)->get();
 

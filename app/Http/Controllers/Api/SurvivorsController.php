@@ -5,23 +5,19 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Item;
 use App\Report;
-use App\Resource;
 use App\Survivor;
 use Exception;
 use Illuminate\Http\Request;
 
-class SurvivorsController extends Controller
-{
+class SurvivorsController extends Controller {
 
     private $survivor;
 
-    public function __construct(Survivor $survivor)
-    {
+    public function __construct(Survivor $survivor) {
         $this->survivor = $survivor;
     }
 
-    public function index()
-    {
+    public function index() {
         try {
             $data = ['data' => $this->survivor->all()];
             return response()->json($data);
@@ -30,8 +26,7 @@ class SurvivorsController extends Controller
         }
     }
 
-    public function show($id)
-    {
+    public function show($id) {
         try {
             $survivor = Survivor::find($id);
 
@@ -60,8 +55,7 @@ class SurvivorsController extends Controller
 
     }
 
-    public function store(Request $request)
-    {
+    public function store(Request $request) {
         try {
             $survivorData = $request->all();
             $this->survivor->create($survivorData);
@@ -73,8 +67,7 @@ class SurvivorsController extends Controller
         }
     }
 
-    public function update(Request $request, $id)
-    {
+    public function update(Request $request, $id) {
         try {
             $latitude = $request->latitude;
             $longitude = $request->longitude;
@@ -97,8 +90,7 @@ class SurvivorsController extends Controller
         }
     }
 
-    public function reportInfectedSurvival($survivorReport, $survivorInfected)
-    {
+    public function reportInfectedSurvivor($survivorReport, $survivorInfected) {
         if ($survivorReport == $survivorInfected) {
             return response()->json(['msg' => 'Both survivors is equal'], 400);
         }

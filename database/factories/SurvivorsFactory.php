@@ -8,7 +8,6 @@ use Faker\Generator as Faker;
 use Illuminate\Database\Eloquent\Factory;
 
 $factory->define(Survivor::class, function (Faker $faker) {
-
     $arrayValues = ['Male', 'Female'];
 
     return [

@@ -12,6 +12,6 @@ class SurvivorsTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(Survivor::class, 20)->create();
+        factory(Survivor::class, 6)->create();
     }
 }

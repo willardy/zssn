@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Factory;
 
 $factory->define(Resource::class, function (Faker $faker) {
     return [
-        'survivor_id' => $faker->unique()->numberBetween(1, 10),
+        'survivor_id' => $faker->unique()->numberBetween(4, 6),
         'item_id' => $faker->numberBetween(1, 4),
         'quantity' => $faker->numberBetween(1, 2)
     ];

@@ -8,10 +8,8 @@ use App\Resource;
 use App\Survivor;
 use Exception;
 
-class ReportsController extends Controller
-{
-    public function percentInfected()
-    {
+class ReportsController extends Controller {
+    public function percentInfected() {
         try {
             $countAllSurvivors = Survivor::count();
             $countInfetedSurvivors = Survivor::where('infected', true)->count();
@@ -24,8 +22,7 @@ class ReportsController extends Controller
         }
     }
 
-    public function percentNonInfected()
-    {
+    public function percentNonInfected() {
         try {
             $countAllSurvivors = Survivor::count();
             $countInfetedSurvivors = Survivor::where('infected', false)->count();
@@ -38,8 +35,7 @@ class ReportsController extends Controller
         }
     }
 
-    public function averageAmount()
-    {
+    public function averageAmount() {
         try {
             $countAllSurvivors = Survivor::count();
 
@@ -57,8 +53,7 @@ class ReportsController extends Controller
         }
     }
 
-    public function pointsLost($survivor_infected_id)
-    {
+    public function pointsLost($survivor_infected_id) {
         try {
             $survivorInfected = Survivor::find($survivor_infected_id);
             if (!$survivorInfected) {
