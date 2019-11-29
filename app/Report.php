@@ -10,11 +10,11 @@ class Report extends Model
 
     function survivorInfected()
     {
-        return $this->belongsTo('App\Survivor');
+        return $this->belongsTo(Survivor::class);
     }
 
     function survivorReporter()
     {
-        return $this->belongsTo('App\Survivor');
+        return $this->belongsTo(Survivor::class);
     }
 }

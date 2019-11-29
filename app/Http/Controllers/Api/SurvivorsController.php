@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Item;
+use App\Report;
 use App\Resource;
 use App\Survivor;
 use Exception;
@@ -96,7 +97,43 @@ class SurvivorsController extends Controller
         }
     }
 
-    private function getResourcesItems($id){
+    public function reportInfectedSurvival($survivorReport, $survivorInfected)
+    {
+        if ($survivorReport == $survivorInfected) {
+            return response()->json(['msg' => 'Both survivors is equal'], 400);
+        }
 
+        $survivor1 = Survivor::find($survivorReport);
+        if (!$survivor1) {
+            return response()->json(['msg' => 'Survivor not found'], 404);
+        }
+
+        $survivor2 = Survivor::find($survivorInfected);
+        if (!$survivor2) {
+            return response()->json(['msg' => 'Survivor not found'], 404);
+        }
+
+        $reportCreated = Report::where('survivor_reporter_id', $survivorReport)->where('survivor_infected_id', $survivorInfected)->first();
+        if ($reportCreated) {
+            return response()->json(['msg' => 'Report already created'], 400);
+        }
+
+        $report = new Report();
+        $report->survivor_reporter_id = $survivorReport;
+        $report->survivor_infected_id = $survivorInfected;
+        $report->save();
+
+        if ($survivor2->getReportsCountAttribute() >= 3) {
+            if ($survivor2->infected == false) {
+                $survivor2->infected = true;
+                $survivor2->save();
+            }
+
+            return response()->json(['msg' => 'Survivor infected!'], 201);
+        } else {
+            return response()->json(['msg' => 'Unconfirmed infection!'], 200);
+        }
     }
+
+
 }
