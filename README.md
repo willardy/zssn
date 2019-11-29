@@ -67,10 +67,10 @@ Content-Type: "application/json"
     }
 ]
 ```
-### GET /survivor/{id}
+### GET /survivors/{id}
 
 ```
-GET /:survivor/{id}
+GET /:survivors/{id}
 Content-Type: "application/json"
 ```
 
@@ -133,10 +133,10 @@ Content-Type: "application/json"
   "msg": "Survivor created at success"
 }
 ```
-### GET /survivor/{id}
+### GET /survivors/{id}
 
 ```
-GET /:survivor/{id}
+GET /:survivors/{id}
 Content-Type: "application/json"
 ```
 
@@ -173,13 +173,13 @@ Content-Type: "application/json"
     "reportsCount": 0
 }
 ```
-### PUT /survivor/{id}
+### PUT /survivors/{id}
 Attribute | Description
 ----------| -----------
 **id**    | Survivor id
 
 ```
-PUT /:survivor/{id}
+PUT /:survivors/{id}
 Content-Type: "application/json"
 ```
 
@@ -194,10 +194,10 @@ Content-Type: "application/json"
 }
 ```
 
-### POST /survivor/{survivorReport}/reportInfected/{survivorReported}
+### POST /survivors/{survivorReport}/reportInfected/{survivorReported}
 
 ```
-POST /:survivor/{survivorReport}/report_infection/{survivorReported}
+POST /:survivors/{survivorReport}/report_infection/{survivorReported}
 Content-Type: "application/json"
 ```
 Attribute | Description
@@ -234,7 +234,7 @@ Content-Type: "application/json"
 }
 ```
 
-### GET /report/percentInfected
+### GET /reports/percentInfected
 ```
 200 Ok
 Content-Type: "application/json"
@@ -252,7 +252,7 @@ Content-Type: "application/json"
 }
 ```
 
-### GET /report/percentNonInfected
+### GET /reports/percentNonInfected
 ```
 200 Ok
 Content-Type: "application/json"
@@ -267,7 +267,7 @@ Content-Type: "application/json"
 }
 ```
 
-### GET /report/averageAmount
+### GET /reports/averageAmount
 ```
 200 Ok
 Content-Type: "application/json"
@@ -285,7 +285,7 @@ Content-Type: "application/json"
     }   
 ```
 
-### GET /report/pointsLost/{id}
+### GET /reports/pointsLost/{id}
 ```
 200 Ok
 Content-Type: "application/json"
