@@ -34,7 +34,7 @@ Route::namespace('Api')->group(function () {
     });
 
     Route::prefix('traders')->name('traders')->group(function (){
-        Route::get('/percentInfected/', 'ReportsController@percentInfected')->name('percentInfected');
+        Route::put('/{survivorOften}/tradeItems/{survivorAceppt}', 'TradersController@tradeItems')->name('tradeItems');
     });
 
 });
