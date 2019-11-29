@@ -133,46 +133,7 @@ Content-Type: "application/json"
   "msg": "Survivor created at success"
 }
 ```
-### GET /survivors/{id}
 
-```
-GET /:survivors/{id}
-Content-Type: "application/json"
-```
-
-Attribute | Description
-----------| -----------
-**id**    | Survivor id
-
-#### Returns
-
-```
-200 Ok
-Content-Type: "application/json"
-
-{
-    "id": 1,
-    "name": "Miss Rhoda Abbott PhD",
-    "age": 55,
-    "gender": "Male",
-    "latitude": "116.4865271",
-    "longitude": "6211846.638",
-    "infected": false,
-    "created_at": "2019-11-29 17:10:49",
-    "updated_at": "2019-11-29 17:10:49",
-    "resources": [
-    {
-      "description": "Water",
-      "points": 4
-    },
-    {
-      "description": "Ammunition",
-      "points": 1
-    }
-    ],
-    "reportsCount": 0
-}
-```
 ### PUT /survivors/{id}
 Attribute | Description
 ----------| -----------
